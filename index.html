@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGIS Portal | Sree Sankaracharya University of Sanskrit</title>
+    <link rel="icon" href="SSUSlogo.jpeg" type="image/jpeg">
+    
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #2563eb;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+            --radius: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 0;
+        }
+
+        /* Top Navigation / Brand Header */
+        .site-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-logo {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .header-title h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .header-title span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Content Cards */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-img {
+            width: 100%;
+            height: auto;
+            max-height: 380px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-banner {
+            width: 100%;
+            height: auto;
+            max-height: 220px;
+            object-fit: contain;
+            background-color: #fbfbfb;
+            border-bottom: 1px solid var(--border-color);
+            display: block;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-light);
+            border-radius: 2px;
+        }
+
+        .card-body p {
+            color: var(--text-muted);
+            text-align: justify;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-body p strong {
+            color: var(--text-main);
+        }
+
+        /* Action Section */
+        .action-area {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.75rem 1.75rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-light);
+        }
+
+        /* Footer & Contact Card */
+        .site-footer {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            padding: 3rem 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .contact-info a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 1.25rem;
+            }
+            .site-header {
+                padding: 0.75rem 1rem;
+            }
+            .header-title h1 {
+                font-size: 1.1rem;
+            }
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Brand Bar -->
+    <header class="site-header">
+        <div class="header-content">
+            <img class="header-logo" src="SSUSlogo.jpeg" alt="SSUS Logo">
+            <div class="header-title">
+                <h1>Sree Sankaracharya University of Sanskrit</h1>
+                <span>Department of Geography | WebGIS Project</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="container">
+
+        <!-- University Card -->
+        <article class="card">
+            <img class="card-img" src="SSUS.jpeg" alt="SSUS Campus Entrance">
+            <div class="card-body">
+                <h2 class="card-title">About the SSUS</h2>
+                <p>
+                    Established in 1993 in Kalady, Kerala—the birthplace of the philosopher Adi Shankara—the <strong>Sree Sankaracharya University of Sanskrit (SSUS)</strong> is a premier public institution dedicated to advancing higher learning in Sanskrit, Indian philosophy, and classical heritage. Accredited with an "A+" grade by the NAAC, the university bridges traditional Vedic and textual scholarship with contemporary education by offering undergraduate, postgraduate, and research programs across humanities, social sciences, fine arts, and modern languages. Operating through its main campus along the banks of the Periyar River and multiple regional centres across Kerala, SSUS plays a pivotal role in democratizing access to higher education, fostering intercultural dialogue, and preserving India’s intellectual and artistic traditions.
+                </p>
+            </div>
+        </article>
+
+        <!-- Department of Geography Card -->
+        <article class="card">
+            <img class="card-banner" src="poster (1).jpg" alt="Department of Geography Banner">
+            <div class="card-body">
+                <h2 class="card-title">Department of Geography</h2>
+                <p>
+                    Established in 1994 under the Faculty of Arts and Social Sciences at the Kalady campus, the <strong>Department of Geography</strong> at Sree Sankaracharya University of Sanskrit (SSUS) is a prominent center for geographical education and spatial research in Kerala. Offering postgraduate and doctoral programs—including its flagship M.Sc. in Geography and collaborative multidisciplinary courses in Disaster Management—the department integrates classical physical and human geography with modern geoinformatics, remote sensing, and GIS applications. Through rigorous fieldwork, socioeconomic surveys, and community-level resource mapping initiatives, it trains students to address real-world environmental and developmental challenges, preparing graduates for key roles in spatial analysis, urban planning, environmental consultancy, and academic research.
+                </p>
+            </div>
+        </article>
+
+        <!-- WebGIS Card -->
+        <article class="card">
+            <div style="background-color: #f8fafc; text-align: center; border-bottom: 1px solid var(--border-color); padding: 1rem 0;">
+                <img style="max-height: 200px; width: auto; object-fit: contain;" src="WebGIS.jpeg" alt="WebGIS Diagram">
+            </div>
+            <div class="card-body">
+                <h2 class="card-title">About WebGIS</h2>
+                <p>
+                    <strong>WebGIS for Aranmula Grama Panchayat</strong> serves as a vital digital spatial platform designed to modernize decentralized governance, natural resource management, and disaster risk reduction within the ecologically sensitive Pamba River basin. By integrating high-resolution geographic data, cadastral boundaries, land-use classifications, and infrastructure networks into an interactive web-based interface, the system enables local administrators, planners, and citizens to visualize ward-level assets and demographic patterns in real time. Given Aranmula’s vulnerability to monsoon flooding and its status as a critical cultural heritage zone, the WebGIS application plays an indispensable role in flood inundation modeling, evacuation planning, wetland conservation, and transparent participatory planning for local self-government development schemes.
+                </p>
+            </div>
+        </article>
+
+        <!-- External Link Area -->
+        <div class="action-area">
+            <a class="btn" href="https://smrithy05.github.io/WebGIS/">
+                Visit External Link &rarr;
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Professional Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="contact-info">
+                <h3>Contact Coordinator</h3>
+                <p><strong>Suresh S</strong></p>
+                <p>Phone: <a href="tel:+918289902147">+91 8289902147</a></p>
+                <p>Email: <a href="mailto:suresh@ssus.ac.in">suresh@ssus.ac.in</a></p>
+            </div>
+            <div class="copyright">
+                <p>&copy; Sree Sankaracharya University of Sanskrit, Kalady.</p>
+                <p>All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <p>vn'ladvm'dbm';mb'</p>
+
+</body>
+</html>
